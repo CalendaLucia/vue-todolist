@@ -4,18 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <title>Vue To Do List</title>
 </head>
 <body>
 
-    <div id="app">
-        <ul class="list-item">
-            <li class="item" v-for="(item, index) in todos">
-                {{item}}
-            </li>
-        </ul>
-    </div>
+    <header>
+        <div id="container-logo">
+            <img src="img/logo.png" alt="logo">
+        </div>
+    </header>
+
+    <section id="add-task">
+        <div id="app">
+            <div id="container-input">
+                <input type="text"  v-model="newTodo" placeholder="New task" @keydown="submitOnEnter($event)">
+                <button type="button" class="button" @click="addTask()">
+                    Aggiungi
+                </button>
+            </div>
+            <div id="container-list">
+               
+                    <ul class="list-item">
+                      <li class="item" v-for="todo in todos" @click="toggleDone(index)">
+                        <span v-if="todo.done" class="strike-through">{{ todo.todo }}</span>
+                        <span v-else>{{ todo.todo }}</span>
+                        <i class="fa-solid fa-xmark" @click="remove(index)"></i>
+                      </li>
+                      
+                    </ul>
+                
+            </div>
+            
+        </div>
+    </section>
+   
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
